@@ -23,6 +23,11 @@ builder.Services.AddMarten(options =>
     //options.RegisterDocumentType<Domain.Entities.CatalogItem>();
 }).UseLightweightSessions();
 
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.InitializeMartenWith<CatalogInitialData>();
+}
+
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 var app = builder.Build();
